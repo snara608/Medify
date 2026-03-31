@@ -1,72 +1,111 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import HospitalCard from "../components/HospitalCard";
 
 export default function Home() {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
-
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [hospitals, setHospitals] = useState([]);
 
-  const navigate = useNavigate();
+  const [showStateDropdown, setShowStateDropdown] = useState(false);
+  const [showCityDropdown, setShowCityDropdown] = useState(false);
 
-  // 🔹 Fetch states
+  // Fetch states
   useEffect(() => {
     fetch("https://meddata-backend.onrender.com/states")
-      .then((res) => res.json())
-      .then((data) => setStates(data));
+      .then(res => res.json())
+      .then(data => setStates(data));
   }, []);
 
-  // 🔹 Fetch cities when state changes
+  // Fetch cities when state selected
   useEffect(() => {
     if (!selectedState) return;
 
     fetch(`https://meddata-backend.onrender.com/cities/${selectedState}`)
-      .then((res) => res.json())
-      .then((data) => setCities(data));
+      .then(res => res.json())
+      .then(data => setCities(data));
   }, [selectedState]);
 
-  // 🔹 Handle search
-  const handleSearch = (e) => {
-    e.preventDefault();
-
-    if (!selectedState || !selectedCity) {
-      alert("Please select state and city");
-      return;
-    }
-
-    navigate(`/search?state=${selectedState}&city=${selectedCity}`);
+  const handleSearch = () => {
+    fetch(
+      `https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity}`
+    )
+      .then(res => res.json())
+      .then(data => setHospitals(data));
   };
 
   return (
-    <form onSubmit={handleSearch}>
-      {/* REQUIRED IDs */}
-      <div id="state">
-        <select onChange={(e) => setSelectedState(e.target.value)}>
-          <option value="">Select State</option>
-          {states.map((state, index) => (
-            <option key={index} value={state}>
-              {state}
-            </option>
-          ))}
-        </select>
+    <div>
+
+      {/* ✅ STATE DROPDOWN */}
+      <div
+        id="state"
+        onClick={() => setShowStateDropdown(!showStateDropdown)}
+        style={{ border: "1px solid black", padding: "10px", cursor: "pointer" }}
+      >
+        {selectedState || "Select State"}
+
+        {showStateDropdown && (
+          <ul>
+            {states.map((state) => (
+              <li
+                key={state}
+                onClick={(e) => {
+                  e.stopPropagation(); // 🔥 IMPORTANT
+                  setSelectedState(state);
+                  setShowStateDropdown(false);
+                }}
+              >
+                {state}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
-      <div id="city">
-        <select onChange={(e) => setSelectedCity(e.target.value)}>
-          <option value="">Select City</option>
-          {cities.map((city, index) => (
-            <option key={index} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
+      {/* ✅ CITY DROPDOWN */}
+      <div
+        id="city"
+        onClick={() => setShowCityDropdown(!showCityDropdown)}
+        style={{ border: "1px solid black", padding: "10px", cursor: "pointer" }}
+      >
+        {selectedCity || "Select City"}
+
+        {showCityDropdown && (
+          <ul>
+            {cities.map((city) => (
+              <li
+                key={city}
+                onClick={(e) => {
+                  e.stopPropagation(); // 🔥 IMPORTANT
+                  setSelectedCity(city);
+                  setShowCityDropdown(false);
+                }}
+              >
+                {city}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
-      {/* REQUIRED BUTTON */}
-      <button type="submit" id="searchBtn">
+      {/* ✅ SEARCH BUTTON */}
+      <button id="searchBtn" type="submit" onClick={handleSearch}>
         Search
       </button>
-    </form>
+
+      {/* ✅ RESULTS */}
+      {hospitals.length > 0 && (
+        <h1>
+          {hospitals.length} medical centers available in{" "}
+          {selectedCity.toLowerCase()}
+        </h1>
+      )}
+
+      {hospitals.map((h, i) => (
+        <HospitalCard key={i} hospital={h} />
+      ))}
+    </div>
   );
 }
