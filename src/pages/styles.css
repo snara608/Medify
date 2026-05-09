@@ -1,0 +1,191 @@
+.home {
+    font-family: Arial, sans-serif;
+  }
+  
+  /* HERO */
+  .hero {
+    background: #e8f1ff;
+    padding: 60px;
+    text-align: center;
+    position: relative;
+    padding: 80px 20px 180px;
+  }
+  
+  .hero h1 span {
+    color: #007bff;
+  }
+  
+
+  
+  /* SPECIALISATION */
+  .specialisation {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+  }
+  
+  .grid div {
+    padding: 20px;
+    background: #f5f8ff;
+    border-radius: 10px;
+  }
+  
+  /* DOCTORS */
+  .doctors {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .doctor-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .card {
+    padding: 20px;
+    background: #f5f8ff;
+    border-radius: 10px;
+  }
+
+  /* SECTION */
+.results-section {
+  width: 85%;
+  margin: 40px auto;
+}
+
+/* HEADING */
+.results-heading {
+  font-size: 24px;
+  font-weight: 600;
+  color: #102851;
+  margin-bottom: 20px;
+}
+
+/* GRID / LIST */
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* LOADING */
+.loading {
+  text-align: center;
+  color: #6b7280;
+}
+.hospital-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* LOGO */
+.logoOne {
+  width: 300px; /* adjust */
+  height: auto;
+}
+
+.search-results-wrapper {
+  background-color: #EFF5FE;
+}
+
+
+/* PAGE */
+.mybooking-page {
+  background: #eff5fe;
+}
+
+/* WRAPPER */
+.booking-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+
+  padding: 40px 80px;
+}
+
+/* LEFT */
+.booking-left {
+  width: 70%;
+}
+
+/* TITLE */
+.booking-main-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #102851;
+
+  margin-bottom: 30px;
+}
+
+/* CARD */
+.booking-card {
+  background: white;
+
+  border-radius: 15px;
+
+  padding: 24px;
+
+  margin-bottom: 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.06);
+}
+
+/* LEFT SIDE */
+.booking-card-left {
+  display: flex;
+  gap: 20px;
+}
+
+/* HOSPITAL LOGO */
+.booking-hospital-logo {
+  width: 120px;
+}
+
+/* INFO */
+.booking-info h3 {
+  color: #102851;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.booking-info p {
+  color: #5c6169;
+  margin-bottom: 6px;
+}
+
+/* BUTTON */
+.booked-btn {
+  background: #00a500;
+
+  color: white;
+
+  border: none;
+
+  padding: 12px 20px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+}
+
+/* RIGHT SIDE */
+.booking-right {
+  width: 25%;
+}
+
+.booking-banner {
+  width: 100%;
+}

@@ -1,111 +1,78 @@
 import { useEffect, useState } from "react";
-import HospitalCard from "../components/HospitalCard";
+import { useNavigate } from "react-router-dom";
+import "./styles.css"
+import Hero from "../components/Hero";
+import Navbar from "../components/Navbar";
+import SearchBox from "../components/SearchingBox";
+import ImageSlider from "../components/Carousel";
+import Specialists from "../components/Specialization";
+import SpecialistPage from "../components/MedicalTeam";
+import Blog from "../components/Blogs";
+import FamilySection from "../components/FamilySec";
+import Faq from "../components/Faq";
+import Contact from "../components/Contactus";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
+
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-  const [hospitals, setHospitals] = useState([]);
 
-  const [showStateDropdown, setShowStateDropdown] = useState(false);
-  const [showCityDropdown, setShowCityDropdown] = useState(false);
+  const navigate = useNavigate();
 
-  // Fetch states
   useEffect(() => {
     fetch("https://meddata-backend.onrender.com/states")
-      .then(res => res.json())
-      .then(data => setStates(data));
+      .then((res) => res.json())
+      .then((data) => setStates(data));
   }, []);
 
-  // Fetch cities when state selected
   useEffect(() => {
     if (!selectedState) return;
 
     fetch(`https://meddata-backend.onrender.com/cities/${selectedState}`)
-      .then(res => res.json())
-      .then(data => setCities(data));
+      .then((res) => res.json())
+      .then((data) => setCities(data));
   }, [selectedState]);
 
-  const handleSearch = () => {
-    fetch(
-      `https://meddata-backend.onrender.com/data?state=${selectedState}&city=${selectedCity}`
-    )
-      .then(res => res.json())
-      .then(data => setHospitals(data));
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    if (!selectedState || !selectedCity) {
+      alert("Please select state and city");
+      return;
+    }
+
+    navigate(`/search?state=${selectedState}&city=${selectedCity}`);
   };
 
   return (
-    <div>
+    <div className="home">
+      <Navbar/>
 
-      {/* ✅ STATE DROPDOWN */}
-      <div
-        id="state"
-        onClick={() => setShowStateDropdown(!showStateDropdown)}
-        style={{ border: "1px solid black", padding: "10px", cursor: "pointer" }}
-      >
-        {selectedState || "Select State"}
+     
+      {/* 🔵 HERO SECTION */}
+      <section className="hero">
+      <Hero/>
+        
+       
+      </section>
+      <SearchBox/>
 
-        {showStateDropdown && (
-          <ul>
-            {states.map((state) => (
-              <li
-                key={state}
-                onClick={(e) => {
-                  e.stopPropagation(); // 🔥 IMPORTANT
-                  setSelectedState(state);
-                  setShowStateDropdown(false);
-                }}
-              >
-                {state}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <ImageSlider/>
+      <Specialists/>
+      
+        
 
-      {/* ✅ CITY DROPDOWN */}
-      <div
-        id="city"
-        onClick={() => setShowCityDropdown(!showCityDropdown)}
-        style={{ border: "1px solid black", padding: "10px", cursor: "pointer" }}
-      >
-        {selectedCity || "Select City"}
 
-        {showCityDropdown && (
-          <ul>
-            {cities.map((city) => (
-              <li
-                key={city}
-                onClick={(e) => {
-                  e.stopPropagation(); // 🔥 IMPORTANT
-                  setSelectedCity(city);
-                  setShowCityDropdown(false);
-                }}
-              >
-                {city}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {/* ✅ SEARCH BUTTON */}
-      <button id="searchBtn" type="submit" onClick={handleSearch}>
-        Search
-      </button>
-
-      {/* ✅ RESULTS */}
-      {hospitals.length > 0 && (
-        <h1>
-          {hospitals.length} medical centers available in{" "}
-          {selectedCity.toLowerCase()}
-        </h1>
-      )}
-
-      {hospitals.map((h, i) => (
-        <HospitalCard key={i} hospital={h} />
-      ))}
+      {/* 👨‍⚕️ DOCTORS */}
+      <SpecialistPage/>
+      <Blog/>
+      <FamilySection/>
+      <Faq/>
+      <Contact/>
+      <Footer/>
     </div>
   );
 }
