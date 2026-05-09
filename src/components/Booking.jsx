@@ -34,17 +34,26 @@ export default function Booking({ hospital }) {
 
       {/* DATE ROW */}
       <div className="booking-days">
-        <div className="day-card active-day">
+      <div
+      className={`day-card ${date === "Today" ? "active-day" : ""}`}
+      onClick={() => setDate("Today")}
+>
           <h4>Today</h4>
           <p>11 Slots Available</p>
         </div>
 
-        <div className="day-card">
+        <div
+      className={`day-card ${date === "Tomorrow" ? "active-day" : ""}`}
+      onClick={() => setDate("Tomorrow")}
+>
           <h4>Tomorrow</h4>
           <p>17 Slots Available</p>
         </div>
 
-        <div className="day-card">
+        <div
+  className={`day-card ${date === "Fri" ? "active-day" : ""}`}
+  onClick={() => setDate("Fri")}
+>
           <h4>Fri</h4>
           <p>18 Slots Available</p>
         </div>

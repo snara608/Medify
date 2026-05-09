@@ -15,10 +15,10 @@ export default function Footer() {
           <img src={MedifyLogo} alt="Medify" className="footer-logo" />
   
           <div className="social-icons">
-            <a href="#"><img src={FacebookLogo} alt="facebook" /></a>
-            <a href="#"><img src={TwitterLogo} alt="twitter" /></a>
-            <a href="#"><img src={YoutubeLogo} alt="youtube" /></a>
-            <a href="#"><img src={PintrestLogo} alt="pinterest" /></a>
+            <a href="/"><img src={FacebookLogo} alt="facebook" /></a>
+            <a href="/"><img src={TwitterLogo} alt="twitter" /></a>
+            <a href="/"><img src={YoutubeLogo} alt="youtube" /></a>
+            <a href="/"><img src={PintrestLogo} alt="pinterest" /></a>
           </div>
           <p className="footer-copy">
                 Copyright ©2023 Surya Nursing Home.com. All Rights Reserved
