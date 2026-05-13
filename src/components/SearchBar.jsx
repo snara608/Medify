@@ -41,10 +41,9 @@ export default function SearchBar() {
       className="Search-panel"
     >
       {/* STATE */}
-      <div className="State-btn">
+      <div id="state" className="State-btn" data-testid="state">
         <span className="mr-2"></span>
         <select
-          id="state"
           className="bg-transparent outline-none w-full"
           onChange={(e) => setSelectedState(e.target.value)}
         >
@@ -56,10 +55,9 @@ export default function SearchBar() {
       </div>
   
       {/* CITY */}
-      <div className="City-btn">
+      <div id="city" className="City-btn" data-testid="city">
         <span className="mr-2"></span>
         <select
-          id="city"
           className="bg-transparent outline-none w-full"
           onChange={(e) => setSelectedCity(e.target.value)}
         >

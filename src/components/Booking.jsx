@@ -13,7 +13,7 @@ export default function Booking({ hospital }) {
 
   const handleBooking = () => {
     const newBooking = {
-      hospital: hospital["Hospital Name"],
+      hospitalName: hospital["Hospital Name"],
       date,
       time,
     };

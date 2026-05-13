@@ -51,7 +51,7 @@ export default function MyBookings() {
 
                 <div className="booking-info">
 
-                  <h3>{b.hospital}</h3>
+                  <h3>{b.hospitalName}</h3>
 
                   <p>{b.date}</p>
 
