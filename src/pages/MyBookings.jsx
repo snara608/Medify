@@ -51,7 +51,9 @@ export default function MyBookings() {
 
                 <div className="booking-info">
 
-                <h3>{String(b.hospital).toLowerCase()}</h3>
+                <h3>
+                  {String(b.hospital || b.hospitalName).toLowerCase()}
+                </h3>
 
                     <p>{b.date}</p>
                     <p>{b.time}</p>
