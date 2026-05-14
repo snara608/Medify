@@ -13,7 +13,7 @@ export default function Booking({ hospital }) {
 
   const handleBooking = () => {
     const newBooking = {
-      hospitalName: hospital["Hospital Name"],
+      hospital: hospital["Hospital Name"],
       date,
       time,
     };
@@ -62,7 +62,7 @@ export default function Booking({ hospital }) {
       {/* TIME SLOTS */}
       {Object.keys(slots).map((period) => (
         <div className="slot-section" key={period}>
-          <h3 className="slot-title">{period}</h3>
+          <p className="slot-title">{period}</p>
 
           <div className="slot-buttons">
             {slots[period].map((t) => (
