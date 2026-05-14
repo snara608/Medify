@@ -53,9 +53,10 @@ export default function MyBookings() {
 
                 <h3>{b.hospital?.toLowerCase()}</h3>
 
+                <div className="booking-meta">
                   <p>{b.date}</p>
-
                   <p>{b.time}</p>
+                </div>
 
                 </div>
               </div>
