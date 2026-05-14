@@ -5,8 +5,12 @@ import "./styles2.css";
 export default function SearchBar() {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
+
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+
+  const [showStates, setShowStates] = useState(false);
+  const [showCities, setShowCities] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,34 +44,71 @@ export default function SearchBar() {
       onSubmit={handleSearch}
       className="Search-panel"
     >
+
       {/* STATE */}
-      <div id="state" className="State-btn" data-testid="state">
-        <span className="mr-2"></span>
-        <select
-          className="bg-transparent outline-none w-full"
-          onChange={(e) => setSelectedState(e.target.value)}
-        >
-          <option value="">State 🔍</option>
-          {states.map((s, i) => (
-            <option key={i}>{s}</option>
-          ))}
-        </select>
+      <div
+        id="state"
+        className="State-btn"
+        data-testid="state"
+      >
+        <input
+          type="text"
+          placeholder="State 🔍"
+          value={selectedState}
+          readOnly
+          className="search-input"
+          onClick={() => setShowStates(!showStates)}
+        />
+
+        {showStates && (
+          <ul className="dropdown-list">
+            {states.map((s, i) => (
+              <li
+                key={i}
+                onClick={() => {
+                  setSelectedState(s);
+                  setShowStates(false);
+                }}
+              >
+                {s}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-  
+
       {/* CITY */}
-      <div id="city" className="City-btn" data-testid="city">
-        <span className="mr-2"></span>
-        <select
-          className="bg-transparent outline-none w-full"
-          onChange={(e) => setSelectedCity(e.target.value)}
-        >
-          <option value="">City 🔍</option>
-          {cities.map((c, i) => (
-            <option key={i}>{c}</option>
-          ))}
-        </select>
+      <div
+        id="city"
+        className="City-btn"
+        data-testid="city"
+      >
+        <input
+          type="text"
+          placeholder="City 🔍"
+          value={selectedCity}
+          readOnly
+          className="search-input"
+          onClick={() => setShowCities(!showCities)}
+        />
+
+        {showCities && (
+          <ul className="dropdown-list">
+            {cities.map((c, i) => (
+              <li
+                key={i}
+                onClick={() => {
+                  setSelectedCity(c);
+                  setShowCities(false);
+                }}
+              >
+                {c}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-  
+
       {/* BUTTON */}
       <button
         id="searchBtn"
@@ -75,7 +116,7 @@ export default function SearchBar() {
       >
         🔍 Search
       </button>
+
     </form>
-    
   );
 }
