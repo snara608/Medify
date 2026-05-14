@@ -51,12 +51,10 @@ export default function MyBookings() {
 
                 <div className="booking-info">
 
-                <h3>{b.hospital?.toLowerCase()}</h3>
+                <h3>{String(b.hospital).toLowerCase()}</h3>
 
-                <div className="booking-meta">
-                  <p>{b.date}</p>
-                  <p>{b.time}</p>
-                </div>
+                    <p>{b.date}</p>
+                    <p>{b.time}</p>
 
                 </div>
               </div>
