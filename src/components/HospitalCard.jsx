@@ -50,7 +50,11 @@ export default function HospitalCard({ hospital }) {
 
       </div>
 
-      {showBooking && <Booking hospital={hospital} />}
+      {showBooking && (
+  <div className="booking-container">
+    <Booking hospital={hospital} />
+  </div>
+)}
     </div>
   );
 }

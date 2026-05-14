@@ -938,3 +938,9 @@ vertical-align: middle;
   cursor: pointer;
   font-weight: 600;
 }
+.booking-container {
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}

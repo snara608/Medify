@@ -46,7 +46,7 @@ export default function SearchResults() {
       {/* REQUIRED HEADING */}
       <div className="results-section">
   <h1 className="results-heading">
-    {hospitals.length} medical centers available in {city}
+    {hospitals.length} medical centers available in {city.toLocaleLowerCase()}
   </h1>
 
   {loading && <p className="loading">Loading data…</p>}
